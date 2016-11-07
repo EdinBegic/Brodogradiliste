@@ -1,0 +1,99 @@
+#order
+{
+    height: 300px;
+    background-image: url(../../Pictures/contact.jpg);
+    width: 107.5%;
+}
+#ispod_headera
+{
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    font-size: 300%;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#ord
+{
+    position: relative;
+    width: 100%;
+    top:14%;
+
+
+}
+#ime_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: #0099cc;
+    color: whitesmoke;
+}
+#prezime_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: whitesmoke;
+    color: #0099cc;
+
+}
+#email_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: #0099cc;
+    color: whitesmoke;
+
+}
+#broj_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: whitesmoke;
+    color: #0099cc;
+
+}
+#tip_broda_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: #0099cc;
+    color: whitesmoke;
+
+}
+#posalji_red
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    background-color: whitesmoke;
+    color: #0099cc;
+}

@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    font-family: Lato;
+}
+
+body{
+    width: 100%;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 1300px;
+}
+
+.kolona-1 {width: 8.33%; 	min-width: 100px;display: block;}
+.kolona-2 {width: 16.66%;	min-width: 100px;display: block;}
+.kolona-3 {width: 25%;	    min-width: 100px;display: block;}
+.kolona-4 {width: 33.33%;   min-width: 100px; display: block;}
+.kolona-5 {width: 41.66%;  	min-width: 100px;display: block;}
+.kolona-6 {width: 50%;  	min-width: 300px; max-width: 600px;display: block;}
+.kolona-7 {width: 58.33%;   min-width: 100px;display: block;}
+.kolona-8 {width: 66.66%;  	min-width: 100px;display: block;}
+.kolona-9 {width: 75%;     	min-width: 100px;display: block;}
+.kolona-10 {width: 83.33%;	min-width: 100px;display: block;}
+.kolona-11 {width: 91.66%;	min-width: 100px;display: block;}
+.kolona-12 {width: 100%;	min-width: 100px;display: block;}
+
+.row{
+    padding: 5px;
+    width:93%;
+    float:left;
+    min-height: 1px;
+}
+
+[class*="kolona-"] {
+    float: left;
+    padding: 0px;
+}
+[class*="kolona-"]:first-child{
+    margin-left: 0px;
+}
+
+[class*="kolona-"]:last-child{
+    margin-right: 0px;
+}
+.meni ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.meni li {
+    padding: 15px;
+    background-color :#33b5e5;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.meni_aktivan ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.meni_aktivan li
+{
+    padding: 15px;
+    background-color : #0099cc;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+}
+#vrh
+{
+    width: 100%;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 1300px;
+    background-color: white;
+
+}
+.meni li:hover {
+    background-color: #0099cc;
+}
+.meni_aktivan li:hover {
+    background-color: #0099cc;
+}
+
+.meni_link
+{
+    text-decoration: none;
+    color: white;
+}
+#background
+{
+    margin-left: auto;
+    margin-right:auto;
+    justify-content: center;
+
+}
+#logo
+{
+    margin-left: auto;
+    margin-right:auto;
+    justify-content: center;
+
+}
+
+#meni_alternativni
+{
+    visibility: hidden;
+}
+@media screen and (max-width: 800px){
+    #prvi_button{
+        visibility: hidden;
+    }
+    #drugi_button{
+        visibility: hidden;
+    }
+    #meni_alternativni{
+        visibility: visible;
+            padding-top: 2%;
+    }
+    #treci_button{
+        visibility: hidden;
+    }
+}
