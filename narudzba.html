@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="lib/css/header.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/narudzba.css">
+
+    <title>Narudžba</title>
+</head>
+<body>
+<div class="row" id="vrh">
+    <div class="kolona-12">
+        <img src="Pictures/logo_brod.jpg">
+    </div>
+    <div class="row">
+        <div class="kolona-1 meni_aktivan" id="meni_alternativni">
+            <ul>
+                <li>
+                    <a href="#" class="meni_link"> Početna</a>
+                </li>
+                <li>
+                    <a href="narudzba.html" class="meni_link">Narudžba </a>
+                </li>
+                <li>
+                    <a href="kontakt.html" class="meni_link">Kontakt </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="kolona-4 meni">
+        <ul>
+            <li>
+                <a href="main.html" class="meni_link"> Početna</a>
+            </li>
+        </ul>
+    </div>
+    <div class="kolona-4 meni_aktivan">
+        <ul>
+            <li>
+                <a href="#" class="meni_link">Narudžba </a>
+            </li>
+        </ul>
+    </div>
+    <div class="kolona-4 meni">
+        <ul>
+            <li>
+                <a href="kontakt.html" class="meni_link">Kontakt </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class = "row" id="ispod_headera">
+    <div class="kolona-12" id="order">
+        <h1 id="ord">Narudžba</h1>
+    </div>
+</div>
+<form action="narudzba.html">
+<div class="row" id="ime_red">
+        <div class="kolona-6" id="ime_kolona1">
+            <label for="fname">Ime:</label>
+        </div>
+        <div class="kolona-6" id="ime_kolona2">
+            <input type="text" id="fname" name="ime">
+        </div>
+</div>
+    <div class="row" id="prezime_red">
+        <div class="kolona-6" id="prezime_kolona1">
+            <label for="lname">Prezime:</label>
+            </div>
+        <div class="kolona-6" id="prezime_kolona2">
+            <input type="text" id="lname" name="prezime">
+        </div>
+    </div>
+    <div class="row" id="email_red">
+        <div class="kolona-6" id="email_kolona1">
+            <label for="Email">Email:</label>
+        </div>
+        <div class="kolona-6" id="email_kolona2">
+            <input type="text" id="Email" name ="email">
+        </div>
+    </div>
+    <div class="row" id="broj_red">
+        <div class="kolona-6" id="broj_kolona1">
+            <label for="broj">Telefon:</label>
+            </div>
+        <div class ="kolona-6" id="broj_kolona2">
+            <input type="text" id="broj" name="broj">
+        </div>
+    </div>
+    <div class="row" id="tip_broda_red">
+        <div class="kolona-6" id="tip_broda_kolona1">
+            <label for="tip_broda">Tip broda:</label>
+            </div>
+        <div class="kolona-6" id="tip_broda_kolona2">
+            <select id="tip_broda" name="tipBroda">
+                <option value="Jahta">Jahta</option>
+                <option value="Katamaran">Katamaran</option>
+                <option value="Trajekt">Trajekt</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" id="posalji_red">
+        <div class="kolona-12" id="posalji_kolona1">
+            <input type="submit" value="Pošalji">
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
