@@ -11,7 +11,7 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
  Na svakoj od ovih stranica postoji html forme na kojoj korisnik unosi određene svoje podatke.
  Implementiran je media querry na početnoj stranici tako da je prikaz optimalan i za telefone uže od 700px.
  Postavljene skice za sve podstranice koje će moja webstranica posjedovati.
- # Spirala 2
+# Spirala 2
  Dodao stranicu Katalog na kojoj se nalazi prikaz dostupnih modela za brodove, pri tome za prikaz je korištena
  galerija. 
  Dodao za svaku stranicu javascript fajlove, preko koje je ispoštovana sva validacija u html formama na svim stranicama.
