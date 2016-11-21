@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="lib/css/header.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/katalog.css">
+    <script type="text/javascript" src="lib/javascript/katalog.js"></script>
+
+    <title>Katalog</title>
+</head>
+<body>
+<div class = "row" id="ispod_headera">
+    <div class="kolona-12" id="catalog">
+        <h1 id="kat">Katalog</h1>
+    </div>
+</div>
+<div class="sredina">
+ <div class="row" id="ponudjeniModeliRed">
+ 			<div class="kolona-12"  id="ponudjeniModeli">
+ 			<p> Dostupni modeli brodova </p></div>
+ </div>
+ <div class="row" id="redSaSlikama">
+            <div class="kolona-12">	
+                <div class="slicice">
+                        <img onmouseover="uvecanaSlikaID.src=this.src; ucitajTekst(1);"  src="Pictures/jahta2.jpg" alt="Nije se mogla ucitati slika" />
+                        <img onmouseover="uvecanaSlikaID.src=this.src; ucitajTekst(2);"  src="Pictures/katamaran2.jpg" alt="Nije se mogla ucitati slika" />
+                        <img onmouseover="uvecanaSlikaID.src=this.src; ucitajTekst(3);"  src="Pictures/trajekt2.jpg" alt="Nije se mogla ucitati slika" />
+                </div>
+                <div class="slikaZaPregled">
+                        <img  id="uvecanaSlikaID" onclick="otvoriModal()" src="Pictures/jahta2.jpg" alt="Nije se mogla ucitati slika"/>
+                </div>
+		    
+		    </div>
+		    </div>
+		<div id="myModal" class="modal">
+		  <div class="modal-content">
+		    <span class="close" onclick="zatvoriModal()">x</span>
+		    <img  id="prosirenaSlikaID"  src="#" alt="Nije se mogla ucitati slika">
+		  
+ </div>
+		</div>
+  <div class="row" id="prviRed">
+  	<div class="kolona-3">&nbsp;</div>
+  	<div class="kolona-3" id="opisKolona1">
+              <div id="opis" class="Opis">
+            	<p id="modelLabel">Model: </p>
+            </div>
+  	</div>
+   <div class="kolona-3" id="opisKolona2">
+               <div id="opis1" class="Opis">
+                <p id="modelBroda" >L-50</p>
+  				</div>
+	</div>
+
+   </div>
+     <div class="row" id="drugiRed">
+  	<div class="kolona-3">&nbsp;</div>
+  	<div class="kolona-3" id="opisKolona3">
+              <div id="opis2" class="Opis">
+            	<p  id="cijenaBrodaLabel">Cijena: </p>
+            </div>
+  	</div>
+   <div class="kolona-3" id="opisKolona4">
+               <div id="opis3" class="Opis">
+                <p id="cijenaBroda">25.000 KM</p>
+  				</div>
+	</div>
+
+   </div>
+</div>
+
+</body>
+</html>

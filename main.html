@@ -5,57 +5,55 @@
     <link rel="stylesheet" type="text/css" href="lib/css/header.css">
     <link rel="stylesheet" type="text/css" href="lib/css/main.css">
 
+
+    <script type="text/javascript" src="lib/javascript/main.js"></script>
+    <script type="text/javascript" src="lib/javascript/narudzba.js"></script>
+    <script type="text/javascript" src="lib/javascript/kontakt.js"></script>
+    <script type="text/javascript" src="lib/javascript/katalog.js"></script>
+
     <title>Virtuelno Brodogradilište</title>
 </head>
 <body>
-
     <div class="row" id="vrh">
             <div class="kolona-12">
-                <img id="logo" src="Pictures/logo_brod.jpg">
+                <img id="logo" src="Pictures/logo_brod.jpg" alt="Nije se mogla ucitati slika">
             </div>
-    <div class="row">
-        <div class="kolona-1 meni_aktivan" id="meni_alternativni">
-            <ul>
-                <li>
-                    <a href="#" class="meni_link"> Početna</a>
-                </li>
-                <li>
-                    <a href="narudzba.html" class="meni_link">Narudžba </a>
-                </li>
-                <li>
-                    <a href="kontakt.html" class="meni_link">Kontakt </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-        <div class="kolona-4 meni_aktivan" id="prvi_button">
+        <div class="kolona-3 meni_aktivan" id="prviButton">
                  <ul>
-                     <li>
-                         <a href="#" class="meni_link"> Početna</a>
+                     <li id="prvi">
+                         <a onclick="osvjeziStranicu()" class="meni_link" > Početna</a>
                      </li>
                  </ul>
              </div>
-            <div class="kolona-4 meni" id="drugi_button">
+            <div class="kolona-3 meni" id="drugiButton">
                 <ul>
-                    <li>
-                        <a href="narudzba.html" class="meni_link">Narudžba </a>
+                    <li id="drugi">
+                        <a onclick="ucitajPodStranicu('narudzba.html',2)" class="meni_link" >Narudžba </a>
                     </li>
                 </ul>
             </div>
-            <div class="kolona-4 meni" id="treci_button">
+            <div class="kolona-3 meni" id="treciButton">
                 <ul>
-                    <li>
-                        <a href="kontakt.html" class="meni_link">Kontakt </a>
+                    <li id="treci">
+                        <a onclick="ucitajPodStranicu('kontakt.html',3)" class="meni_link" >Kontakt </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="kolona-3 meni" id="cetvrtiButton">
+                <ul>
+                    <li id="cetvrti">
+                        <a onclick="ucitajPodStranicu('katalog.html',4)" class="meni_link" >Katalog </a>
                     </li>
                 </ul>
             </div>
         </div>
+  <div class="podstranica" id="podstr">
     <div class="row" id="ispod_headera">
         <div class="kolona-12" id="about">
             <h1 id="oBrodogradilistu">O brodogradilištu</h1>
         </div>
     </div>
-
+    <div id="IspodMenija">
     <div class="row" id="glavni_dio">
         <div class="kolona-12">
             <p>
@@ -76,46 +74,50 @@
         </div>
     </div>
         <div class="row" id="username_red">
-            <div class="kolona-6" id="username_kolona1">
+        <div class="kolona-3">&nbsp;</div>
+            <div class="kolona-3" id="username_kolona1">
                 <label for="fname">Username:</label>
             </div>
-            <div class="kolona-6" id="username_kolona2">
-                <input type="text" id="fname" name="username">
+            <div class="kolona-3" id="username_kolona2">
+                <input type="text" id="fname" name="username" required autofocus oninput="validacijaUser()" oninvalid="validacijaUser()">
             </div>
         </div>
         <div class="row" id="password_red">
-            <div class="kolona-6" id="password_kolona1">
+            <div class="kolona-3">&nbsp;</div>
+            <div class="kolona-3" id="password_kolona1">
                 <label for="lname">Password:</label>
             </div>
-            <div class="kolona-6" id="password_kolona2">
-                <input type="password" id="lname" name="password">
+            <div class="kolona-3" id="password_kolona2">
+                <input type="password" id="lname" name="password" required oninput="validacijaPassword()" oninvalid="validacijaPassword()">
             </div>
         </div>
         <div class="row" id="password_potvrdi_red">
-            <div class="kolona-6" id="password_potvrdi_kolona1">
-                <label for="pwrd">Password:</label>
+            <div class="kolona-3">&nbsp;</div>
+            <div class="kolona-3" id="password_potvrdi_kolona1">
+                <label for="pwrd">Potvrdite Password:</label>
             </div>
-            <div class="kolona-6" id="password_potvrdi_kolona2">
-                <input type="password" id="pwrd" name="password">
+            <div class="kolona-3" id="password_potvrdi_kolona2">
+                <input type="password" id="pwrd" name="password" required oninvalid="potvrdaPassword()" oninput="potvrdaPassword()">
             </div>
         </div>
         <div class="row" id="email_red">
-            <div class="kolona-6" id="email_kolona1">
+            <div class="kolona-3">&nbsp;</div>
+            <div class="kolona-3" id="email_kolona1">
                 <label for="Email">Email:</label>
             </div>
-            <div class="kolona-6" id="email_kolona2">
-                <input type="text" id="Email" name ="email">
+            <div class="kolona-3" id="email_kolona2">
+                <input type="text" id="Email" name ="email" required oninvalid="validacijaEmail()" oninput="validacijaEmail()">
             </div>
         </div>
         <div class="row" id="posalji_red">
             <div class="kolona-12" id="posalji_kolona1">
-                <input type="submit" value="Registruj se">
+                <input type="submit" value="Registruj se" id="dugmeZaSlanje">
             </div>
         </div>
 
     </form>
-
-
+  </div>
+</div>
 
 
 </body>

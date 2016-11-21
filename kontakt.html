@@ -4,36 +4,11 @@
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="lib/css/header.css">
     <link rel="stylesheet" type="text/css" href="lib/css/kontakt.css">
+    <script type="text/javascript" src="lib/javascript/kontakt.js"></script>
 
     <title>Kontakt</title>
 </head>
 <body>
-<div class="row" id="vrh">
-    <div class="kolona-12">
-        <img src="Pictures/logo_brod.jpg">
-    </div>
-    <div class="kolona-4 meni">
-        <ul>
-            <li>
-                <a href="main.html" class="meni_link"> Početna</a>
-            </li>
-        </ul>
-    </div>
-    <div class="kolona-4 meni">
-        <ul>
-            <li>
-                <a href="narudzba.html" class="meni_link">Narudžba </a>
-            </li>
-        </ul>
-    </div>
-    <div class="kolona-4 meni_aktivan">
-        <ul>
-            <li>
-                <a href="#" class="meni_link">Kontakt </a>
-            </li>
-        </ul>
-    </div>
-</div>
 <div class = "row" id="ispod_headera">
     <div class="kolona-12" id="contact-us">
         <h1 id="kont">Kontakt</h1>
@@ -73,14 +48,29 @@
         <p>Ukoliko imate neka pitanja, možete ostaviti email adresu ili broj telefona, a mi ćemo vas u dogledno vrijeme kontaktirati.</p>
     </div>
 </div>
+<form action="main.html">
 <div class="row" id ="pomoc_forma">
-    <form action="kontakt.html">
-    <div class="kolona-12" id="email_ili_broj">
-        <label for="fname">Email/Telefon: </label>
-        <input type="text" id="fname" name="emailtel">
-        <input type="submit" value="Pošalji">
+    <div class="kolona-3">&nbsp;</div>
+    <div class="kolona-3" id="email_ili_broj">
+        <select id="kontaktOpcije" name="kontaktOpcije"  required>
+            <option value="Email" id="emailAdresa">Email</option>
+            <option value="Telefon" id="tel">Telefon</option>
+        </select>
         </div>
-    </form>
+        <div class="kolona-3" id="unosPolje">
+        <input type="text" id="fname" name="emailtel" oninput="validacijaPolja()" oninvalid="validacijaPolja()" autofocus required>
 </div>
+ </div>
+<div class ="row" id ="proslijediInfo">
+    <div class="kolona-2">&nbsp;</div>
+     <div class="kolona-2">&nbsp;</div>
+    <div class="kolona-4" id="proslijediArgument">
+        <input id="dugmeZaSlanje" type="submit" value="Pošalji">
+    </div>
+</div>
+</form>
+
+
+
 </body>
 </html>
