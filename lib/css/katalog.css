@@ -1,0 +1,190 @@
+#catalog
+{
+    height: 300px;
+    background-image: url(../../Pictures/contact.jpg);
+    width: 107.5%;
+}
+#ispod_headera
+{
+    min-width: 500px;
+    max-width: 1300px;
+    text-align: center;
+    font-size: 300%;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#ponudjeniModeliRed
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 0.5%;
+    text-align: center;
+    background-color: #0099cc;
+    color: whitesmoke;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+#redSaSlikama
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 2%;
+    padding-bottom: 0.5%;
+    text-align: center;
+    background-color: #0099cc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+#kat
+{
+    position: relative;
+    top:14%;
+    width: 100%;
+
+}
+#ponudjeniModeli
+{
+	position: relative;
+	text-align: center;
+	font-size: 180%;
+
+}
+.sredina
+{
+    position: relative;
+    margin-left: 0%;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    color: whitesmoke;
+    min-width: 500px;
+    max-width: 1300px;
+}
+#galerija
+{
+}
+.slicice
+{
+	position: relative;
+	align-content: center;
+}
+.slicice img
+{
+	height: 90px;
+	width: 180px;
+	border: 4px solid darkgrey;
+	padding: 1px;
+}
+
+.slicice img:hover
+{
+	border: 4px solid whitesmoke;
+	cursor: pointer;
+}
+
+.slikaZaPregled img
+{
+	height: 300px;
+	width: 600px;
+	border: 4px solid whitesmoke;
+}
+
+.slikaZaPregled img:hover
+{
+	cursor: zoom-in;
+}
+#opisKolona1
+{
+	    font-weight: bold;
+	background-color: whitesmoke;
+    color: #0099cc;
+	border: 1px solid darkgrey;
+}
+#opisKolona2
+{
+	    font-weight: bold;
+	background-color: whitesmoke;
+    color: #0099cc;
+	border: 1px solid darkgrey;
+
+}
+#opisKolona3
+{
+	    font-weight: bold;
+	background-color: whitesmoke;
+    color: #0099cc;
+	border: 1px solid darkgrey;
+}
+#opisKolona4
+{
+	    font-weight: bold;
+	background-color: whitesmoke;
+    color: #0099cc;
+	border: 1px solid darkgrey;
+
+}
+#prviRed
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 0.5%;
+    padding-bottom: 0px;
+    text-align: center;
+    background-color: #0099cc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+
+}
+#drugiRed
+{
+    margin-left: .3%;
+    width: 99.3%;
+    padding-top: 0px;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #0099cc;
+}
+
+#prosirenaSlikaID
+{
+	max-width: 750px;
+	min-height: 375px;
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 99999; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+#red
+{
+	    padding: 10px;
+    width: 100%;
+    float: left;
+
+}
+.modal-content{
+    margin: 10% auto; 
+    padding: 20px;
+    width: 80%; 
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

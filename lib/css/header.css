@@ -23,6 +23,10 @@ body{
 .kolona-11 {width: 91.66%;	min-width: 100px;display: block;}
 .kolona-12 {width: 100%;	min-width: 100px;display: block;}
 
+.podstranica
+{
+    width: 100%;
+}
 .row{
     padding: 5px;
     width:93%;
@@ -105,7 +109,11 @@ body{
     justify-content: center;
 
 }
+input:valid {
+    border: 2px solid lime;
+}
 
+/*
 #meni_alternativni
 {
     visibility: hidden;
@@ -124,4 +132,4 @@ body{
     #treci_button{
         visibility: hidden;
     }
-}
+}*/

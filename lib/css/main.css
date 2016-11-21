@@ -38,6 +38,7 @@ background-image: url(../../Pictures/contact.jpg);
     margin-left: .3%;
     width: 99.3%;
     padding-top: 2%;
+    font-weight: bold;
     padding-bottom: 2%;
     text-align: justify;
     background-color: #0099cc;
@@ -65,6 +66,7 @@ background-image: url(../../Pictures/contact.jpg);
     padding-bottom: 2%;
     min-width: 500px;
     max-width: 1300px;
+    font-weight: bold;
     text-align: center;
     background-color: #0099cc;
     color: whitesmoke;
@@ -74,6 +76,7 @@ background-image: url(../../Pictures/contact.jpg);
     margin-left: .3%;
     width: 99.3%;
     padding-top: 2%;
+    font-weight: bold;
     padding-bottom: 2%;
     min-width: 500px;
     max-width: 1300px;
@@ -84,6 +87,7 @@ background-image: url(../../Pictures/contact.jpg);
 }
 #password_potvrdi_red
 {
+    font-weight: bold;
     margin-left: .3%;
     width: 99.3%;
     padding-top: 2%;
@@ -97,6 +101,7 @@ background-image: url(../../Pictures/contact.jpg);
 }
 #email_red
 {
+    font-weight: bold;
     margin-left: .3%;
     width: 99.3%;
     padding-top: 2%;
@@ -111,6 +116,7 @@ background-image: url(../../Pictures/contact.jpg);
 }
 #posalji_red
 {
+    font-weight: bold;
     margin-left: .3%;
     width: 99.3%;
     padding-top: 2%;
@@ -122,3 +128,25 @@ background-image: url(../../Pictures/contact.jpg);
     color: whitesmoke;
 
 }
+#ispodMenija
+{
+    font-weight: bold;
+}
+
+#dugmeZaSlanje
+{
+    background-color: whitesmoke;
+    border: 1px solid darkgrey;
+    color: #0099cc;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;  
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#dugmeZaSlanje:hover
+{
+    background-color: lightblue;
+} 

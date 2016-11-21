@@ -21,6 +21,10 @@
 
 
 }
+#ispodMenija
+{
+    font-weight: bold;
+}
 #ime_red
 {
     margin-left: .3%;
@@ -97,3 +101,20 @@
     background-color: whitesmoke;
     color: #0099cc;
 }
+#dugmeZaSlanje
+{
+     background-color: #0099cc;
+    border: none;
+    color: whitesmoke;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;  
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#dugmeZaSlanje:hover
+{
+    background-color: darkblue;
+} 
