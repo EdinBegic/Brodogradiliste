@@ -31,6 +31,10 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
  se nalazi na main.php gdje sve vrste korisnika unose kljucnu rijec na osnovu koje se izlistaju modeli (njihovi nazivi i
  cijene) koje sadrze tu rijec (slovo) u svom opisu. 
 - Klikom na dugme pretrazi otvara se Katalog.php na kome bivaju izlistani modeli koji su bili predlozeni u search sugestijama.
+- Login podaci za administratora: username: admin, password: password
+- Login podaci za obicnog korisnika: username: edin, password: 123456
+- Odradjen deployment na server: http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/main.php
+- Alternativni server: http://edin.dev.teleklik.net/
 # II  - Šta nije urađeno? Spirala 1
  Nisu implementirani media querry-iji na ostale dvije stranice.
  Nisu postavljene skice za prikaz na telefonu.
@@ -44,8 +48,9 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
 # V  - Lista fajlova u formatu NAZIVFAJLA - Opis u vidu jedne rečenice šta se u fajlu nalazi 
 
  **Testni podaci**
-- izvjestaj.csv - izvjestaj u csv formatu generisane za modele brodova
-- pdfIzvjestaj.pdf - PDF izvjestaj za testne podatke u XML file-ovima
+- **izvjestaj.csv** - izvjestaj u csv formatu generisane za modele brodova
+- **pdfIzvjestaj.pdf** - PDF izvjestaj za testne podatke u XML file-ovima
+ 
  **PHP file-ovi**
 
 - **csvIzvjestaj.php** -Skriptu koju pozivam s katalog.php da bi se generisao csv izvjestaj

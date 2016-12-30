@@ -78,7 +78,7 @@ function praznoPolje($string)
     else
         return false;
 }
-function jedinstvenostUsername($username) // Provjera da li u bazi postoji korisnik s takvim username-om
+function jedinstvenostUsername($username,$id = null) // Provjera da li u bazi postoji korisnik s takvim username-om
 {
     global $pathKorisnici;
 
@@ -87,7 +87,7 @@ function jedinstvenostUsername($username) // Provjera da li u bazi postoji koris
         $korisnici = simplexml_load_file($pathKorisnici);
         foreach($korisnici->children() as $korisnik)
         {
-            if($korisnik->username == $username)
+            if($korisnik->username == $username && $korisnik->id != $id)
                 return false;
         }
     }

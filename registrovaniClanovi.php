@@ -36,7 +36,7 @@ else {
                 $_SESSION['izmijeni'] = "on";
                 $_SESSION['polje'] = $korisnik->id + 0;
             } elseif ($_REQUEST[$str] == 'SPASI') {
-                if (isset($_REQUEST['username']) && isset($_REQUEST['email'])) {
+                if (isset($_REQUEST['username']) && isset($_REQUEST['email']) && isset($_REQUEST['id'])) {
                     if (!praznoPolje($_REQUEST['username']) && !praznoPolje($_REQUEST['email'])) {
                         if (!validacijaUsername($_REQUEST['username'])) {
                             echo "<script type='text/javascript'>alert('Username se moze sastojati samo od alfanumerickih znakova duzine od 2 do 18 karaktera');</script>";
@@ -46,10 +46,15 @@ else {
                             echo "<script type='text/javascript'>alert('Unesite validan email');</script>";
                             break;
                         }
-                        if (!jedinstvenostUsername($_REQUEST['username'])) {
+                        $idProvjera = (string)$korisnik->id;
+                        $requestID = (string)$_REQUEST['id'];
+                        if(!jedinstvenostUsername($_REQUEST['username'],$requestID))
+                        {
                             echo "<script type='text/javascript'>alert('Postoji korisnik s takvim username-om');</script>";
                             break;
+
                         }
+
                         $korisnik->username = xssPrevencija($_REQUEST['username']);
                         $korisnik->email = xssPrevencija($_REQUEST['email']);
                         $kor->asXML('lib/xml/korisnici.xml');
@@ -109,6 +114,7 @@ else
                 echo "<td>$korisnik->id</td>";
                 echo "<td><input type='text' name='username' value='$korisnik->username'></td>";
                 echo "<td><input type='text' name='email' value='$korisnik->email'></td>";
+                echo "<input type='hidden' name='id' value='$korisnik->id'>";
                 echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $korisnik->id . "' value='SPASI'></td>";
                 echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $korisnik->id . "' value='OBRISI'></td>";
                 echo "</tr>";
