@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<modeli>
+    <model>
+        <id>1</id>
+        <naziv>L4-23</naziv>
+        <cijena>2.600.000 KM</cijena>
+    </model>
+    <model>
+        <id>2</id>
+        <naziv>Lagoon 440</naziv>
+        <cijena>100.000 KM</cijena>
+    </model>
+    <model>
+        <id>3</id>
+        <naziv>RC Ferry</naziv>
+        <cijena>1.300.000 KM</cijena>
+    </model>
+    <model>
+        <id>5</id>
+        <naziv>Yug-44</naziv>
+        <cijena>56.000 KM</cijena>
+    </model>
+    <model>
+        <id>6</id>
+        <naziv>TMV</naziv>
+        <cijena>34.000 KM</cijena>
+    </model>
+    <model>
+        <id>7</id>
+        <naziv>Brodica</naziv>
+        <cijena>14.000 KM</cijena>
+    </model>
+    <model>
+        <id>8</id>
+        <naziv>Cruiser ship</naziv>
+        <cijena>100.000.000 KM</cijena>
+    </model>
+    <model>
+        <id>10</id>
+        <naziv>Parni brod</naziv>
+        <cijena>1.100.000 KM</cijena>
+    </model>
+    <model>
+        <id>11</id>
+        <naziv>Trajekt X84</naziv>
+        <cijena>53.000.000 KM</cijena>
+    </model>
+    <model>
+        <id>12</id>
+        <naziv>Kanu</naziv>
+        <cijena>23.000 KM</cijena>
+    </model>
+    <model>
+        <id>13</id>
+        <naziv>Camac</naziv>
+        <cijena>1.500 KM</cijena>
+    </model>
+</modeli>

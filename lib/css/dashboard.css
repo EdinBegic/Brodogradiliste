@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+}
+
+body{
+    width: 100%;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 1300px;
+}
+
+.kolona-1 {width: 8.33%; 	min-width: 100px;display: block;}
+.kolona-2 {width: 16.66%;	min-width: 100px;display: block;}
+.kolona-3 {width: 25%;	    min-width: 100px;display: block;}
+.kolona-4 {width: 33.33%;   min-width: 100px; display: block;}
+.kolona-5 {width: 41.66%;  	min-width: 100px;display: block;}
+.kolona-6 {width: 50%;  	min-width: 300px; max-width: 600px;display: block;}
+.kolona-7 {width: 58.33%;   min-width: 100px;display: block;}
+.kolona-8 {width: 66.66%;  	min-width: 100px;display: block;}
+.kolona-9 {width: 75%;     	min-width: 100px;display: block;}
+.kolona-10 {width: 83.33%;	min-width: 100px;display: block;}
+.kolona-11 {width: 91.66%;	min-width: 100px;display: block;}
+.kolona-12 {width: 100%;	min-width: 100px;display: block;}
+
+.podstranica
+{
+    width: 100%;
+}
+.row{
+    padding: 5px;
+    width:100%;
+    float:left;
+    min-height: 1px;
+}
+
+[class*="kolona-"] {
+    float: left;
+    padding: 0px;
+}
+.altKolona-2 {width: 16.66%;	min-width: 100px;display: block;}
+[class*="altKolona-"] {
+    float: right;
+    padding: 0px;
+
+}
+
+[class*="kolona-"]:first-child{
+    margin-left: 0px;
+}
+
+[class*="kolona-"]:last-child{
+    margin-right: 0px;
+}
+
+
+#background
+{
+    margin-left: auto;
+    margin-right:auto;
+    justify-content: center;
+
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="kolona-"] {
+        width: 100%;
+    }
+}
+
+
+.blue    { background-color: whitesmoke; }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+.active {
+    background-color: #BE1200;
+}
+
+#tabela {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tabela td, #tabela th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#tabela tr:nth-child(even){background-color: #f2f2f2;}
+
+#tabela tr:hover {background-color: #ddd;}
+
+#tabela th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0099cc;
+    color: white;
+}
+.dugme
+{
+    width: 100px;
+    height: 40px;
+    background-color: #0099cc;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.dugme:hover
+{
+    background-color: #16C2FB;
+}
+input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid cornflowerblue;
+    border-radius: 4px;
+    font-size: large;
+
+}

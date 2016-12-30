@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Narudzbe>
+    <Narudzba>
+        <id>3</id>
+        <ime>Samir</ime>
+        <prezime>Muratovic</prezime>
+        <email>samir@gmail.com</email>
+        <telefon>062 233-124</telefon>
+        <tipBroda>Katamaran</tipBroda>
+    </Narudzba>
+    <Narudzba>
+        <id>8</id>
+        <ime>Vedad</ime>
+        <prezime>Ibisevic</prezime>
+        <email>vedad.ibi@msn.com</email>
+        <telefon>061/123-456</telefon>
+        <tipBroda>Jahta</tipBroda>
+    </Narudzba>
+    <Narudzba>
+        <id>10</id>
+        <ime>Dalibor</ime>
+        <prezime>Mijatovic</prezime>
+        <email>dal.mij@msn.com</email>
+        <telefon>066/554-323</telefon>
+        <tipBroda>Jahta</tipBroda>
+    </Narudzba>
+    <Narudzba>
+        <id>11</id>
+        <ime>Zaim</ime>
+        <prezime>Imamovic</prezime>
+        <email>zaim.imamovic@gmail.com</email>
+        <telefon>111 111 111</telefon>
+        <tipBroda>Katamaran</tipBroda>
+    </Narudzba>
+</Narudzbe>

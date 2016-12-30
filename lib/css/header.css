@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: Lato;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -38,6 +38,13 @@ body{
     float: left;
     padding: 0px;
 }
+.altKolona-2 {width: 16.66%;	min-width: 100px;display: block;}
+[class*="altKolona-"] {
+    float: right;
+    padding: 0px;
+
+}
+
 [class*="kolona-"]:first-child{
     margin-left: 0px;
 }
@@ -83,6 +90,10 @@ body{
     background-color: white;
 
 }
+
+#sesti:hover{
+    background-color:#33b5e5;
+}
 .meni li:hover {
     background-color: #0099cc;
 }
@@ -112,6 +123,80 @@ body{
 input:valid {
     border: 2px solid lime;
 }
+textarea:valid{
+    border: 2px solid lime;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="kolona-"] {
+        width: 100%;
+    }
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  /*  border: 2px solid cornflowerblue; */
+    border-radius: 4px;
+    font-size: large;
+
+}
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+   /* border: 2px solid cornflowerblue; */
+    border-radius: 4px;
+    font-size: large;
+
+}
+input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+   /* border: 2px solid cornflowerblue; */
+    border-radius: 4px;
+    font-size: large;
+
+}
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid cornflowerblue;
+    border-radius: 4px;
+    font-size: large;
+}
+
+
+#trakaOnline
+{
+    background-image: url(../../Pictures/more.png);
+    width: 99.1%;
+    margin-left: 0.4%;
+}
+
+.styled-select {
+    height: 29px;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    /*padding: 12px 20px;*/
+    margin: 8px 0;
+    font-size: large;
+}
+.semi-square {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 4px;
+}
+.blue    { background-color: whitesmoke; }
 
 /*
 #meni_alternativni
