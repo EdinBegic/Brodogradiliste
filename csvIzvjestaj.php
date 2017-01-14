@@ -35,4 +35,6 @@ foreach ($lista as $polje) {
     fputcsv($fp, $polje);
 }
 fclose($fp);
+$veza = null;
+$iskaz = null;
 exit();

@@ -140,11 +140,11 @@
 
                 echo "<tr>";
                 echo "<td>".$row['id']."</td>";
-                echo "<td><input type='text' name='ime' value=".$row['ime']."></td>";
-                echo "<td><input type='text' name='prezime' value=".$row['prezime']."></td>";
-                echo "<td><input type='text' name='telefon' value=".$row['telefon']."></td>";
-                echo "<td><input type='text' name='tipBroda' value=".$row['tipBroda']."></td>";
-                echo "<td><input type='text' name='korisnik' value=".$row['korisnik']."></td>";
+                echo "<td><input type='text' name='ime' value='".$row['ime']."'></td>";
+                echo "<td><input type='text' name='prezime' value='".$row['prezime']."'></td>";
+                echo "<td><input type='text' name='telefon' value='".$row['telefon']."'></td>";
+                echo "<td><input type='text' name='tipBroda' value='".$row['tipBroda']."'></td>";
+                echo "<td><input type='text' name='korisnik' value='".$row['korisnik']."'></td>";
                 echo "<td style='text-align: center'><input type='submit'  class='dugme' name='opt_" . $row['id'] . "' value='SPASI'></td>";
                 echo "<td style='text-align: center'><input type='submit'  class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";

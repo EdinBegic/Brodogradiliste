@@ -31,9 +31,6 @@ else
             $iskaz->bindParam(':naziv', $model->naziv);
             $iskaz->execute();
             $row = $iskaz->fetch(PDO::FETCH_ASSOC);
-
-           
-
             if($row['brojac'] == 0) // Dodaj u bazu 
             {
                 $query2 = "INSERT INTO modeli (naziv, cijena) VALUES (:naziv, :cijena)";
@@ -104,8 +101,6 @@ else
                 $iskaz4->execute();
                 $iskaz4 = null;
             }
-            $iskaz4 = null;
-            $iskaz3 = null;
             $iskaz2 = null;
             $iskaz1 = null;
             $iskaz = null;

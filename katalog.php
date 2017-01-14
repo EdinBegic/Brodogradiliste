@@ -195,6 +195,8 @@ if(isset($_SESSION['username']))
 
             echo "</div>";
         }
+        $veza = null;
+        $iskaz = null;
     ?>
     <div id="myModal" class="modal">
         <div class="modal-content">

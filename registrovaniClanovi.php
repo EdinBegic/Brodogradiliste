@@ -121,8 +121,8 @@ require 'validacija.php';
             {
                 echo "<tr style='text-align: center'>";
                 echo "<td>".$row['id']."</td>";
-                echo "<td><input type='text' name='username' value=".$row['username']."></td>";
-                echo "<td><input type='text' name='email' value=".$row['email']."></td>";
+                echo "<td><input type='text' name='username' value='".$row['username']."'></td>";
+                echo "<td><input type='text' name='email' value='".$row['email']."'></td>";
                 echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='SPASI'></td>";
                 echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";

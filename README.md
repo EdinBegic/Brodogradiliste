@@ -35,12 +35,27 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
 - Login podaci za obicnog korisnika: username: edin, password: 123456
 - Odradjen deployment na server: http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/main.php
 - Alternativni server: http://edin.dev.teleklik.net/
+
+# Spirala 4
+- Svi podaci koji su spasavani/mijenjani/brisani iz XML dokumenata sada je implementirano da se iste operacije vrse nad bazom podataka
+- U bazi podataka brodogradiliste nalaze se 4 tabele: 'korisnik', 'komentar', 'narudzba' i 'modeli'
+- Tabele 'korisnik', 'komentar' i 'narudzba' su medjusobno povezani, tj. 'narudzba' i 'komentar' imaju foreign key na id tabele 'korisnik'
+- Da bi ovakva veza bila moguca, izmijenjen je sistem pristupa web stranici, sada samo prijavljeni korisnici mogu pisati komentare i slati narudzbe
+ dok su prije to mogli raditi i obicni posjetioci stranice
+- Na main.php dodano je dugme 'Importuj podatke' koje moze vidjeti samo admin te pritiskom na isti kupi podatke iz XML-a(skripta 'xmlImport.php') te ih spasava u bazu
+ ukoliko isti vec nisu spaseni u bazi
+- Napravljena skripta webServis.php koja implementira GET metodu rest servisa i na kojoj se mogu vidjeti izlistani JSON objekti za tabelu 'komentar'
+- U folderu POSTMAN prikazano je nekoliko primjera upotrebe kreiranog web servisa
+- deployment stranice na server: http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/main.php
+- deployment baze na server (username:'admin', password:'password') : http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/pma 
 # II  - Šta nije urađeno? Spirala 1
  Nisu implementirani media querry-iji na ostale dvije stranice.
  Nisu postavljene skice za prikaz na telefonu.
 # Spirala 2
  Nije implementiran drop-down meni.
 # Spirala 3
+ Sve je implementirano.
+# Spirala 4
  Sve je implementirano.
  
 # III - Bug-ovi koje ste primijetili ali niste stigli ispraviti, a znate rješenje (opis rješenja)
@@ -50,9 +65,14 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
  **Testni podaci**
 - **izvjestaj.csv** - izvjestaj u csv formatu generisane za modele brodova
 - **pdfIzvjestaj.pdf** - PDF izvjestaj za testne podatke u XML file-ovima
- 
- **PHP file-ovi**
 
+ **pma folder** - phpmyadmin folder potreban za remote pristup bazi
+ 
+ **POSTMAN folder** - u folderu se nalaze screenshot-ovi testiranog web servisa pomocu POSTMAN aplikacije
+
+ **PHP file-ovi**
+- **xmlImport.php** - Skriptu koju admin poziva s main.php kako bi importovao podatke iz XML-a
+- **webServis.php** - Implementirana REST metoda za prikaz podataka u obliku JSON objekata (tabela 'komentar')
 - **csvIzvjestaj.php** -Skriptu koju pozivam s katalog.php da bi se generisao csv izvjestaj
 - **dashboard.php** - Pocetna stranica dashboard-a kome ima pristup samo admin (izlistane sve spašene narudžbe)
 - **katalog.php** - stranica na kome su prikazani svi modeli brodova (admin moze dodavati,brisati,mijenjati modele)

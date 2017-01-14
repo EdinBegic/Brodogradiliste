@@ -97,6 +97,8 @@ else
         $pdf->Cell(40,10,'Email: ebegic2@etf.unsa.ba',0,2,'L');
 
         $pdf->Output('I', 'Izvjestaj.pdf');
+        $veza = null;
+        $iskaz = null;
         ob_end_flush();
         exit();
     }

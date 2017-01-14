@@ -44,12 +44,16 @@
     $iskaz->execute();
     $row = $iskaz->fetch(PDO::FETCH_ASSOC);
      if($row['brojac'] == 0){
+        $iskaz = null;
+        $veza = null;
         die('Neuspjesna prijava!');
      }
      else if($row['brojac'] == 1)
      {
                 session_start();
                 $_SESSION['username'] = $usernameIzForme;
+                $iskaz = null;
+                $veza = null;
                 echo "<script type='text/javascript'>alert('Uspjesno ste se prijavili.');</script>";
                 echo "<script type='text/javascript'>window.location.href='main.php'</script>";
                 exit();

@@ -1,12 +1,12 @@
 <?php
 // Regex stringovi za provjeru
-$regexIme = "~^[a-zA-Z]{2,18}$~";
-$regexPrezime = "~^[a-zA-Z]{2,18}$~";
+$regexIme = "~^[a-zA-Z ]{2,18}$~";
+$regexPrezime = "~^[a-zA-Z ]{2,18}$~";
 $regexUsername = "~^\w{2,18}$~";
 $regexPassword = "~^.{6,}$~";
 $regexEmail = "~^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$~i";
-$regexTelefon = "~^\d{3}[,\-,/]\d{3}[,\-,/]\d{3}$~i";
-$regexCijena = "~^[a-zA-Z0-9.,\-]{2,18}$~";
+$regexTelefon = "~^\d{3}[ ,\-,/]\d{3}[ ,\-,/]\d{3}$~i";
+$regexCijena = "~^[a-zA-Z0-9 .,\-]{2,18}$~";
 $pathKorisnici = "lib/xml/korisnici.xml";
 function xssPrevencija($podatak)
 {
