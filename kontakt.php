@@ -66,14 +66,6 @@
     </div>
 </div>
 <?php
-if(!file_exists("lib/xml/komentari.xml")) // Ukoliko ne postoji fajl, kreiraj novi
-{
-    $komentari = new SimpleXMLElement("<komentari></komentari>");
-    header("Content-type: text/xml");
-    $komentari->asXML("lib/xml/komentari.xml");
-    header("Location: kontakt.php");
-    exit();
-}
 if(isset($_SESSION['username']))
 {
     if($_SESSION['username'] == 'admin')

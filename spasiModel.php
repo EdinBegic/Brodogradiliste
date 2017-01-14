@@ -13,7 +13,6 @@ if(isset($_REQUEST['naziv']) && isset($_REQUEST['cijena']))
             echo "<script type='text/javascript'>window.location.href='katalog.php'</script>";
             exit();
         }
-//        $modeli = simplexml_load_file("lib/xml/modeli.xml");
         // Potrebno je obezbijediti zastitu od XSS-a
         $naziv = xssPrevencija($_REQUEST['naziv']);
         $cijena = xssPrevencija($_REQUEST['cijena']);
@@ -44,7 +43,7 @@ if(isset($_REQUEST['naziv']) && isset($_REQUEST['cijena']))
             $iskaz->bindValue(2, $cijena, PDO::PARAM_STR);
             $rezultat = $iskaz->execute();
             //Konekcija kod PDO objekta se zatvara setovanjem objekta na null za razliku
-            // od mysqli gdje je potrebno pozvati metodu closedir
+            // od mysqli gdje je potrebno pozvati metodu close
             $iskaz = null;
             $veza = null;
             // ukoliko nije uspješan unos

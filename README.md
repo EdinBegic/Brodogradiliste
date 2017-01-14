@@ -48,6 +48,7 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
 - U folderu POSTMAN prikazano je nekoliko primjera upotrebe kreiranog web servisa
 - deployment stranice na server: http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/main.php
 - deployment baze na server (username:'admin', password:'password') : http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/pma 
+
 # II  - Šta nije urađeno? Spirala 1
  Nisu implementirani media querry-iji na ostale dvije stranice.
  Nisu postavljene skice za prikaz na telefonu.

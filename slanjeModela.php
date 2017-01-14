@@ -43,6 +43,8 @@ while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
     }
 }
 if($br == 0 && !isset($_REQUEST['dodaj'])) {
+    $iskaz = null;
+    $veza = null;
     header("Location: katalog.php");
     exit();
 }

@@ -49,30 +49,11 @@
         echo "<script type='text/javascript'>window.location.href='registracija.php'</script>";
         exit();
     }
- //   $korisnici = simplexml_load_file("lib/xml/korisnici.xml");
-/*
-    $vel = $korisnici->count();
-    if($vel == 0)
-        $id = 1;
-    else
-    {
-        $cvor = $korisnici->korisnik[$vel - 1];
-        $id = $cvor->id + 1;
-    }
-    $korisnik = $korisnici->addChild('korisnik');
-    $korisnik->addChild('id', $id);
-    $korisnik->addChild('username', $username);
-    $korisnik->addChild('password', $password);
-    $korisnik->addChild('email', $email);
-    $korisnik->addChild('priv', 0); // svaki novi registrovani clan nema privilegije admina
-    $korisnici->asXML("lib/xml/korisnici.xml");
-*/
+
     $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
     $veza->exec("set names utf8");
-   
-        
+
     $query = "SELECT COUNT(username) AS brojac FROM korisnik WHERE username = :username";
-   
     $iskaz = $veza->prepare($query);
     $iskaz->bindValue(':username', $username);
     $iskaz->execute();
@@ -80,16 +61,14 @@
      if($row['brojac'] > 0){
         die('Postoji korisnik sa takvim username-om u bazi');
      }
-
     $insert = "INSERT INTO korisnik (username, password, email) " ."VALUES (?, ?, ?)";
-
     $iskaz = $veza->prepare($insert);
     $iskaz->bindValue(1, $username, PDO::PARAM_STR);
     $iskaz->bindValue(2, $password, PDO::PARAM_STR);
     $iskaz->bindValue(3, $email, PDO::PARAM_STR);
     $rezultat = $iskaz->execute();
     //Konekcija kod PDO objekta se zatvara setovanjem objekta na null za razliku
-    // od mysqli gdje je potrebno pozvati metodu closedir
+    // od mysqli gdje je potrebno pozvati metodu close
     $iskaz = null;
     $veza = null;
     // ukoliko nije uspješan unos

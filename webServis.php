@@ -25,6 +25,7 @@
             while($row = $iskaz->fetch(PDO::FETCH_ASSOC)){
                 $rezultat[] = $row;
             }
+            $iskaz = null;
             print json_encode($rezultat);
 
         }
@@ -37,9 +38,11 @@
             while($row = $iskaz->fetch(PDO::FETCH_ASSOC)){
                 $rezultat[] = $row;
             }
+            $iskaz = null;
             print json_encode($rezultat);
 
         }
+        $veza = null;
      }
     function rest_post($request, $data) { }
     function rest_delete($request) { }
