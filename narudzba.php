@@ -9,6 +9,15 @@
     <title>Narudžba</title>
 </head>
 <body>
+<?php
+    session_start();
+    if(!isset($_SESSION['username']))
+    {
+        echo "<script type='text/javascript'>alert('Pristup samo prijavljenim korisnicima');</script>";
+        echo "<script type='text/javascript'>window.location.href='main.php'</script>";
+        exit();
+    }
+?>
 <div class="row" id="vrh">
     <div class="kolona-12">
         <img id="logo" src="Pictures/logo_brod.jpg" alt="Nije se mogla ucitati slika">
@@ -57,15 +66,7 @@
     </div>
 </div>
 <?php
-session_start();
-if(!file_exists("lib/xml/Narudzbe.xml")) // Ukoliko ne postoji fajl, kreiraj novi
-{
-    $narudzbe = new SimpleXMLElement("<Narudzbe></Narudzbe>");
-    header("Content-type: text/xml");
-    $narudzbe->asXML("lib/xml/Narudzbe.xml");
-    header("Location: narudzba.php");
-    exit();
-}
+
 if(isset($_SESSION['username']))
 {
     if($_SESSION['username'] == 'admin')
@@ -124,16 +125,7 @@ if(isset($_SESSION['username']))
             <input type="text" id="lname" name="prezime" oninput="validacijaPrezime()" oninvalid="validacijPrezime()" required>
         </div>
     </div>
-    <div class="row" id="email_red">
-            <div class="kolona-3">&nbsp;</div>
-        <div class="kolona-3" id="email_kolona1">
-            <label for="Email">Email:</label>
-        </div>
-        <div class="kolona-3" id="email_kolona2">
-            <input type="text" id="Email" name ="email" oninput="validacijaEmail()" oninvalid="validacijaEmail()" required>
-        </div>
-    </div>
-    <div class="row" id="broj_red">
+    <div class="row" id="tip_broda_red">
         <div class="kolona-3">&nbsp;</div>
         <div class="kolona-3" id="broj_kolona1">
             <label for="broj">Telefon:</label>
@@ -142,7 +134,7 @@ if(isset($_SESSION['username']))
             <input type="text" id="broj" name="broj"  oninput="validacijaTelefon()" oninvalid="validacijaTelefon()" required>
         </div>
     </div>
-    <div class="row" id="tip_broda_red">
+    <div class="row" id="broj_red">
         <div class="kolona-3">&nbsp;</div>
         <div class="kolona-3" id="tip_broda_kolona1">
             <label for="tip_broda">Tip broda:</label>

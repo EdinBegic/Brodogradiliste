@@ -9,14 +9,11 @@ if(!isset($_REQUEST['csvIzvjestaj']))
     exit();
 }
 
-if(!file_exists('lib/xml/modeli.xml'))
-{
-    echo "<script type='text/javascript'>alert('Baza podataka modela trenutno nije dostupna');</script>";
-    echo "<script type='text/javascript'>window.location.href='main.php'</script>";
-    exit();
-}
-else
-    $modeli = simplexml_load_file("lib/xml/modeli.xml");
+$veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+$veza->exec("set names utf8");
+
+$query = "SELECT * FROM modeli";
+$iskaz = $veza->query($query);
 
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=izvjestaj.csv');
@@ -28,10 +25,10 @@ $prviRed = array('Naziv','Cijena');
 
 fputcsv($fp,$prviRed);
 
-foreach ($modeli->children() as $model)
+while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
 {
     $red = array();
-    array_push($red, $model->naziv, $model->cijena);
+    array_push($red, $row['naziv'], $row['cijena']);
     array_push($lista, $red);
 }
 foreach ($lista as $polje) {

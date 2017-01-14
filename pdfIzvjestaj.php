@@ -28,33 +28,42 @@ else
         $pdf->Cell(95,10,'Ponudjeni modeli',1,0,'C');
         $pdf->Cell(95,10,'Cijena',1,1,'C');
         $pdf->SetFont('Arial','',12);
-        // Podaci iz XML-a
-        $mod;
-        if(!file_exists("lib/xml/modeli.xml"))
+        // Podaci iz baze
+            $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+            $veza->exec("set names utf8");
+        
+             $query = "SELECT * FROM modeli";
+             $iskaz = $veza->query($query);
+        if(!$veza)
         {
             $pdf->Cell(95,10,"Modeli nedostupni u bazi",1,1);
         }
         else {
-            $mod = simplexml_load_file("lib/xml/modeli.xml");
-            foreach ($mod->children() as $model) {
-                $pdf->Cell(95, 10, $model->naziv, 1, 0, 'C');
-                $pdf->Cell(95, 10, $model->cijena, 1, 1, 'C');
+            while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
+            {
+                $pdf->Cell(95, 10, $row['naziv'], 1, 0, 'C');
+                $pdf->Cell(95, 10, $row['cijena'], 1, 1, 'C');
+
             }
         }
-        $nar;
-        if(!file_exists("lib/xml/Narudzbe.xml"))
+        $query = "SELECT COUNT(*) AS brojac FROM narudzba";
+        $iskaz = $veza->query($query);
+        $row = $iskaz->fetch(PDO::FETCH_ASSOC);
+        
+        if(!$veza)
         {
             $pdf->Cell(95,10,"Narudzbe nedostupne u bazi",1,1);
         }
         else
         {
-            $nar = simplexml_load_file("lib/xml/Narudzbe.xml");
             $pdf->SetFont('Arial','B',14);
             $pdf->Cell(90,20,'Broj trenutnih narudzbi u procesiranju:',0,0,'L');
-            $pdf->Cell(50,20,$nar->count(),0,1,'C'); // Podaci iz xml-a
+            $pdf->Cell(50,20,$row['brojac'],0,1,'C'); // Podaci iz xml-a
         }
-        $kor;
-        if(!file_exists("lib/xml/korisnici.xml"))
+        $query = "SELECT COUNT(*) AS brojac FROM korisnik";
+        $iskaz = $veza->query($query);
+        $row = $iskaz->fetch(PDO::FETCH_ASSOC);
+        if(!$veza)
         {
             $pdf->Cell(95,10,"Korisnici nedostupni u bazi",1,1);
         }
@@ -62,10 +71,12 @@ else
         {
             $kor = simplexml_load_file("lib/xml/korisnici.xml");
             $pdf->Cell(90,20,'Broj registrovanih korisnika:',0,0,'L');
-            $pdf->Cell(50,20,$kor->count(),0,1,'C'); // Podaci iz xml-a (ukljucujuci administratora)
+            $pdf->Cell(50,20,$row['brojac'],0,1,'C'); // Podaci iz xml-a (ukljucujuci administratora)
         }
-        $kom;
-        if(!file_exists("lib/xml/komentari.xml"))
+        $query = "SELECT COUNT(*) AS brojac FROM komentar";
+        $iskaz = $veza->query($query);
+        $row = $iskaz->fetch(PDO::FETCH_ASSOC);
+        if(!$veza)
         {
             $pdf->Cell(95,10,"Komentari nedostupni u bazi",1,1);
         }
@@ -73,7 +84,7 @@ else
         {
             $kom = simplexml_load_file("lib/xml/komentari.xml");
             $pdf->Cell(90,20,'Broj poslanih komenatara:',0,0,'L');
-            $pdf->Cell(50,20,$kom->count(),0,1,'C'); // Podaci iz xml-a
+            $pdf->Cell(50,20,$row['brojac'],0,1,'C'); // Podaci iz xml-a
         }
 
         $pdf->SetFont('Arial','B',14);

@@ -138,6 +138,20 @@ if(isset($_SESSION['username']))
         <?php
         if(isset($_SESSION['username'])) {
 
+            if($_SESSION['username'] == 'admin')
+            {
+                echo '<div class="row" id="izvjestaj">';
+                echo '<div class="kolona-12" id="pdfLabel">';
+                echo '<p><h2>Sacuvajte podatke iz XML-a u bazu<h2></p>';
+                echo '</div>';
+                echo '<div class="kolona-12" id="pdfDokument">';
+                echo '<form method="post" action="xmlImport.php">';
+                echo '<input type="hidden" name="importujXML" value="1">';
+                echo '<input type="submit" id="dugmePDF" style="font-size: 120%" value="Importuj podatke">';
+                echo '</form>';
+                echo '</div>';
+                echo '</div>';
+            }
             echo '<div class="row" id="izvjestaj">';
             echo '<div class="kolona-12" id="pdfLabel">';
             echo '<p><h2>Izvještaj o web stranici zapisan u PDF-u<h2></p>';

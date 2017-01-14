@@ -2,12 +2,10 @@
 <komentari>
     <komentar>
         <id>1</id>
-        <email>ebegic2@etf.unsa.ba</email>
         <tekst>Svaka cast!!</tekst>
     </komentar>
     <komentar>
         <id>2</id>
-        <email>rici.mici@msn.com</email>
         <tekst>Lorem ipsum tipsum hipsum tarmimpsum monimpsfum </tekst>
     </komentar>
 </komentari>

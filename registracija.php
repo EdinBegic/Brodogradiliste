@@ -10,44 +10,10 @@
 <body>
 <?php
 session_start();
-if(!file_exists("lib/xml/korisnici.xml")) // Ukoliko ne postoji fajl, kreiraj novi
-{
-    $korisnici = new SimpleXMLElement("<korisnici></korisnici>");
-    header("Content-type: text/xml");
-    $korisnici->asXML("lib/xml/korisnici.xml");
-    header("Location: registracija.php");
-    exit();
-}
 if(isset($_SESSION['username']))
-{   /*
-    if($_SESSION['username'] == 'admin')
-    {
-        // Kreiraj dashboard podstranicu za admina
-        echo '<script language="javascript">';
-        echo "document.getElementById('stanjeButton').innerHTML = '<a><b>Dashboard</b></a>';";
-        echo "document.getElementById('sesti').style.backgroundColor ='black';";
-        echo '</script>';
-
-        echo "<div class='row' style='width: 100%'>";
-        echo "<div class='altKolona-2' style='text-align: center; background-color: lightgreen'>";
-        echo "Dobro došao ".$_SESSION['username'];
-        echo "<br><button><a href='odjava.php'>Odjavi se</a></button>";
-        echo "</div>";
-        echo "</div>";
-    }
-    else
-    {
-        echo "<div class='row' style='width: 100%'>";
-        echo "<div class='altKolona-2' style='text-align: center; background-color: yellow'>";
-        echo "Dobro došao ".$_SESSION['username'];
-        echo "<br><button><a href='odjava.php'>Odjavi se</a></button>";
-        echo "</div>";
-        echo "</div>";
-
-    }*/
+{   
     echo "<script type='text/javascript'>alert('Vec ste prijavljeni!');</script>";
     echo "<script type='text/javascript'>window.location.href='main.php'</script>";
-
 }
 ?>
 <div class="row" id="vrh">

@@ -9,29 +9,29 @@
 <?php
 require 'provjeraAutorizacije.php';
 require 'validacija.php';
-if(!file_exists('lib/xml/modeli.xml'))
-{
-    $mod = new SimpleXMLElement("<modeli></modeli>");
-    header("Content-type: text/xml");
-    $mod->asXML("lib/xml/modeli.xml");
-    header("Location: modeli.php");
-    exit();
-}
-else {
-    $mod = simplexml_load_file("lib/xml/modeli.xml");
-    foreach ($mod->children() as $model) {
-        $str = 'opt_' . $model->id;
+ $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+   $veza->exec("set names utf8");     
+   $query = "SELECT * FROM modeli";
+   $iskaz = $veza->query($query);   
+    while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
+    {
+        $str = 'opt_' . $row['id'];
 
         if (isset($_REQUEST[$str])) {
             if ($_REQUEST[$str] == 'OBRISI') // funkcija brisanja
             {
-                $dom = dom_import_simplexml($model);
-                $dom->parentNode->removeChild($dom);
-                $mod->asXML('lib/xml/modeli.xml');
+                $delete = "DELETE FROM modeli WHERE id = :id";
+                $iskaz2 = $veza->prepare($delete);
+                $iskaz2->bindParam(":id", $row['id']);
+                $rezultat = $iskaz2->execute();
+                if($rezultat == false)
+                    die('Doslo je do greske prilikom brisanja iz baze');
+                $iskaz2 = null;
+
             } elseif ($_REQUEST[$str] == 'IZMIJENI') // funkcija izmjene
             {
                 $_SESSION['izmijeni'] = "on";
-                $_SESSION['polje'] = $model->id + 0;
+                $_SESSION['polje'] = $row['id'] + 0;
             } elseif ($_REQUEST[$str] == 'SPASI') {
                 if (isset($_REQUEST['naziv']) && isset($_REQUEST['cijena'])) {
                     if (!praznoPolje($_REQUEST['naziv']) && !praznoPolje($_REQUEST['cijena'])) {
@@ -44,9 +44,17 @@ else {
                             echo "<script type='text/javascript'>alert('Unijeli ste sintaksno neispravnu cijenu.');</script>";
                             break;
                         }
-                        $model->naziv = xssPrevencija($_REQUEST['naziv']);
-                        $model->cijena = xssPrevencija($_REQUEST['cijena']);
-                        $mod->asXML('lib/xml/modeli.xml');
+                        $row['naziv'] = xssPrevencija($_REQUEST['naziv']);
+                        $row['cijena'] = xssPrevencija($_REQUEST['cijena']);
+                        
+                        $update = "UPDATE modeli SET naziv = :naziv, cijena = :cijena  WHERE id = :id";
+                        $iskaz3 = $veza->prepare($update);
+                        $iskaz3->bindParam(':naziv',$row['naziv']);
+                        $iskaz3->bindParam(':cijena',$row['cijena']);
+                        $iskaz3->bindParam(':id',$row['id']);
+                        $rezultat = $iskaz3->execute();
+                        if($rezultat == false)
+                            die('Doslo je do greske prilikom upisa u bazu');
                     } else {
                         echo "<script type='text/javascript'>alert('Niste ispunili sva polja!');</script>";
                     }
@@ -54,7 +62,6 @@ else {
             }
         }
     }
-}
 
 ?>
 <div class="row">
@@ -80,53 +87,52 @@ else {
     </div>
 </div>
 <?php
-if(!file_exists("lib/xml/modeli.xml"))
-{
- }
-else
-{
-    $modeli = simplexml_load_file("lib/xml/modeli.xml");
+
+     $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+     $veza->exec("set names utf8");     
+     $query = "SELECT * FROM modeli";
+     $iskaz = $veza->query($query);   
     echo "<div class='row'>";
     echo "<div class='kolona-12'>";
     echo "<form action='modeli.php' method='get'>";
     echo "<table id='tabela'>";
     echo "<tr><th>ID</th><th>NAZIV</th><th>CIJENA</th><th>OPCIJA 1</th><th>OPCIJA 2</th></tr>";
 
-    foreach ($modeli->children() as $model)
+    while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
     {
 
         if(isset($_SESSION['izmijeni']))
         {
-            if($_SESSION['polje'] == ($model->id + 0) && $_SESSION['izmijeni'] == 'on')
+            if($_SESSION['polje'] == ($row['id'] + 0) && $_SESSION['izmijeni'] == 'on')
             {
                 echo "<tr style='text-align: center'>";
-                echo "<td>$model->id</td>";
-                echo "<td><input type='text' name='naziv' value='$model->naziv'></td>";
-                echo "<td><input type='text' name='cijena' value='$model->cijena'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='SPASI'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='OBRISI'></td>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td><input type='text' name='naziv' value=".$row['naziv']."></td>";
+                echo "<td><input type='text' name='cijena' value=".$row['cijena']."></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='SPASI'></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";
                 $_SESSION['izmijeni'] = 'off';
             }
             else
             {
                 echo "<tr style='text-align: center'>";
-                echo "<td>$model->id</td>";
-                echo "<td>$model->naziv</td>";
-                echo "<td>$model->cijena</td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='IZMIJENI'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='OBRISI'></td>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td>".$row['naziv']."</td>";
+                echo "<td>".$row['cijena']."</td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='IZMIJENI'></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";
             }
         }
         else
         {
             echo "<tr style='text-align: center'>";
-            echo "<td>$model->id</td>";
-            echo "<td>$model->naziv</td>";
-            echo "<td>$model->cijena</td>";
-            echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='IZMIJENI'></td>";
-            echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $model->id . "' value='OBRISI'></td>";
+            echo "<td>".$row['id']."</td>";
+            echo "<td>".$row['naziv']."</td>";
+            echo "<td>".$row['cijena']."</td>";
+            echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='IZMIJENI'></td>";
+            echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
             echo "</tr>";
         }
     }
@@ -134,7 +140,9 @@ else
     echo "</div>";
     echo "</div>";
     echo "</form>";
-}
+    
+    $iskaz = null;
+    $veza = null;
 ?>
 
 </body>

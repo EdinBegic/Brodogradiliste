@@ -10,47 +10,58 @@
 <?php
 require 'provjeraAutorizacije.php';
 require 'validacija.php';
-if(!file_exists("lib/xml/komentari.xml"))
-{
-    $kom = new SimpleXMLElement("<komentari></komentari>");
-    header("Content-type: text/xml");
-    $kom->asXML("lib/xml/komentari.xml");
-    header("Location: komentari.php");
-    exit();
-}
-else {
-    $kom = simplexml_load_file("lib/xml/komentari.xml");
-    foreach ($kom->children() as $komentar) {
-        $str = 'opt_' . $komentar->id;
+   $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+   $veza->exec("set names utf8");     
+   $query = "SELECT * FROM komentar";
+   $iskaz = $veza->query($query);   
+    while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
+    {
+        $str = 'opt_' . $row['id'];
 
         if (isset($_REQUEST[$str])) {
             if ($_REQUEST[$str] == 'OBRISI') // funkcija brisanja
             {
-                $dom = dom_import_simplexml($komentar);
-                $dom->parentNode->removeChild($dom);
-                $kom->asXML('lib/xml/komentari.xml');
+                $delete = "DELETE FROM komentar WHERE id = :id";
+                $iskaz2 = $veza->prepare($delete);
+                $iskaz2->bindParam(":id", $row['id']);
+                $rezultat = $iskaz2->execute();
+                if($rezultat == false)
+                    die('Doslo je do greske prilikom brisanja iz baze');
+                $iskaz2 = null;
+
             } elseif ($_REQUEST[$str] == 'IZMIJENI') // funkcija izmjene
             {
                 $_SESSION['izmijeni'] = "on";
-                $_SESSION['polje'] = $komentar->id + 0;
+                $_SESSION['polje'] = $row['id'] + 0;
             } elseif ($_REQUEST[$str] == 'SPASI') {
                 // Da li je zaista poslan request?
-                if (isset($_REQUEST['email']) && isset($_REQUEST['tekst'])) {
+                if (isset($_REQUEST['korisnik']) && isset($_REQUEST['tekst'])) {
                     // Provjera da li su submit-ani podaci prazni
-                    if (!praznoPolje($_REQUEST['email']) && !praznoPolje($_REQUEST['tekst'])) {
+                    if (!praznoPolje($_REQUEST['korisnik']) && !praznoPolje($_REQUEST['tekst'])) {
                         //Validacija podataka
-                        if (!validacijaEmail($_REQUEST['email'])) {
-                            echo "<script type='text/javascript'>alert('Unesite validan email');</script>";
-                            break;
-                        }
                         if (!validacijaKomentar($_REQUEST['tekst'])) {
                             echo "<script type='text/javascript'>alert('Komentar ne moze bit duzi od 100 karaktera');</script>";
                             break;
                         }
+                        if (!validacijaKorisnikID($_REQUEST['korisnik'])) {
+                            echo "<script type='text/javascript'>alert('Ne postoji korisnik s takvim id-em');</script>";
+                            break;
+                        }
                         // Potrebno je obezbijediti zastitu od XSS-a
-                        $komentar->email = xssPrevencija($_REQUEST['email']);
-                        $komentar->tekst = xssPrevencija($_REQUEST['tekst']);
-                        $kom->asXML('lib/xml/komentari.xml');
+                        $row['korisnik'] = xssPrevencija($_REQUEST['korisnik']);
+                        $row['tekst'] = xssPrevencija($_REQUEST['tekst']);
+                        $update = "UPDATE komentar SET tekst = :tekst, korisnik = :korisnik  WHERE id = :id";
+                        $iskaz3 = $veza->prepare($update);
+                        $iskaz3->bindParam(':tekst',$row['tekst']);
+                        $iskaz3->bindParam(':korisnik',$row['korisnik']);
+                        $iskaz3->bindParam(':id',$row['id']);
+                        $rezultat = $iskaz3->execute();
+
+                        if($rezultat == false)
+                        {
+                            die('Doslo je do greske prilikom izmjene narudzbe u bazi');
+                        }
+
                     } else {
                         echo "<script type='text/javascript'>alert('Niste ispunili sva polja!');</script>";
                     }
@@ -58,7 +69,7 @@ else {
             }
         }
     }
-}
+
 
 ?>
 <div class="row">
@@ -85,53 +96,52 @@ else {
 </div>
 
 <?php
-if(!file_exists("lib/xml/komentari.xml"))
-{
- }
-else
-{
-    $komentari = simplexml_load_file("lib/xml/komentari.xml");
+
+   $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+   $veza->exec("set names utf8");     
+   $query = "SELECT * FROM komentar";
+   $iskaz = $veza->query($query);   
     echo "<div class='row'>";
     echo "<div class='kolona-12'>";
     echo "<form action='komentari.php' method='get'>";
     echo "<table id='tabela'>";
-    echo "<tr><th>ID</th><th>EMAIL</th><th>KOMENTAR</th><th>OPCIJA 1</th><th>OPCIJA 2</th></tr>";
+    echo "<tr><th>ID</th><th>KOMENTAR</th><th>KORISNIK ID</th><th>OPCIJA 1</th><th>OPCIJA 2</th></tr>";
 
-    foreach ($komentari->children() as $komentar)
+    while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
     {
 
         if(isset($_SESSION['izmijeni']))
         {
-            if($_SESSION['polje'] == ($komentar->id + 0) && $_SESSION['izmijeni'] == 'on')
+            if($_SESSION['polje'] == ($row['id'] + 0) && $_SESSION['izmijeni'] == 'on')
             {
                 echo "<tr>";
-                echo "<td>$komentar->id</td>";
-                echo "<td><input type='text' name='email' value='$komentar->email'></td>";
-                echo "<td><input type='text' name='tekst' value='$komentar->tekst'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $komentar->id . "' value='SPASI'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $komentar->id . "' value='OBRISI'></td>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td><input type='text' name='tekst' value='". $row['tekst'] . "'></td>";
+                echo "<td><input type='text' name='korisnik' value=".$row['korisnik']."></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='SPASI'></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";
                 $_SESSION['izmijeni'] = 'off';
             }
             else
             {
                 echo "<tr>";
-                echo "<td>$komentar->id</td>";
-                echo "<td>$komentar->email</td>";
-                echo "<td>$komentar->tekst</td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $komentar->id . "' value='IZMIJENI'></td>";
-                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $komentar->id . "' value='OBRISI'></td>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td>".$row['tekst']."</td>";
+                echo "<td>".$row['korisnik']."</td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='IZMIJENI'></td>";
+                echo "<td style='text-align: center'><input type='submit' class='dugme' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
                 echo "</tr>";
             }
         }
         else {
 
             echo "<tr>";
-            echo "<td>$komentar->id</td>";
-            echo "<td>$komentar->email</td>";
-            echo "<td>$komentar->tekst</td>";
-            echo "<td style='text-align: center'><input class='dugme' type='submit' name='opt_" . $komentar->id . "' value='IZMIJENI'></td>";
-            echo "<td style='text-align: center'><input class='dugme' type='submit' name='opt_" . $komentar->id . "' value='OBRISI'></td>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td>".$row['tekst']."</td>";
+                echo "<td>".$row['komentar']."</td>";
+            echo "<td style='text-align: center'><input class='dugme' type='submit' name='opt_" . $row['id'] . "' value='IZMIJENI'></td>";
+            echo "<td style='text-align: center'><input class='dugme' type='submit' name='opt_" . $row['id'] . "' value='OBRISI'></td>";
             echo "</tr>";
 
 
@@ -141,7 +151,9 @@ else
     echo "</div>";
     echo "</div>";
     echo "</form>";
-}
+    $iskaz = null;
+    $veza = null;
+
 
 ?>
 

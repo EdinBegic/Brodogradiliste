@@ -9,6 +9,15 @@
     <title>Kontakt</title>
 </head>
 <body>
+<?php
+    session_start();
+    if(!isset($_SESSION['username']))
+    {
+        echo "<script type='text/javascript'>alert('Pristup samo prijavljenim korisnicima');</script>";
+        echo "<script type='text/javascript'>window.location.href='main.php'</script>";
+        exit();
+    }
+?>
 <div class="row" id="vrh">
     <div class="kolona-12">
         <img id="logo" src="Pictures/logo_brod.jpg" alt="Nije se mogla ucitati slika">
@@ -57,7 +66,6 @@
     </div>
 </div>
 <?php
-session_start();
 if(!file_exists("lib/xml/komentari.xml")) // Ukoliko ne postoji fajl, kreiraj novi
 {
     $komentari = new SimpleXMLElement("<komentari></komentari>");
@@ -139,13 +147,6 @@ if(isset($_SESSION['username']))
     </div>
 </div>
 <form action="slanjeKomentara.php" method="post">
-<div class="row" id ="pomoc_forma">
-
-        <div class="kolona-4">&nbsp;</div>
-        <div class="kolona-3" id="unosPolje">
-        <input type="text" id="fname" name="email" placeholder="Email" oninput="validacijaEmail()" oninvalid="validacijaEmail()" autofocus required>
-        </div>
- </div>
     <div class="row" id ="pomoc_forma2">
         <div class="kolona-3">&nbsp;</div>
         <div class="kolona-6" id="koment">

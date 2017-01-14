@@ -9,7 +9,7 @@
         </korisnik>
     <korisnik>
         <id>2</id>
-        <username>edin</username>
+        <username>doktor</username>
         <password>123456</password>
         <email>ebegic2@etf.unsa.ba</email>
         <priv>0</priv>

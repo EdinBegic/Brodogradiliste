@@ -98,14 +98,14 @@
     min-width: 500px;
     max-width: 1300px;
     text-align: center;
-    background-color: whitesmoke;
-    color: #0099cc;
+    background-color: #0099cc;
+    color: whitesmoke;
 }
 #dugmeZaSlanje
 {
-     background-color: #0099cc;
+     background-color: whitesmoke;
     border: none;
-    color: whitesmoke;
+    color: #0099cc;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -116,7 +116,7 @@
 }
 #dugmeZaSlanje:hover
 {
-    background-color: #1252ba;
+    background-color: white;
 }
 
 #ime_kolona1

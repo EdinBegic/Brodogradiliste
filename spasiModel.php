@@ -6,8 +6,6 @@ require 'validacija.php';
 
 if(isset($_REQUEST['naziv']) && isset($_REQUEST['cijena']))
 {
-    if(file_exists("lib/xml/modeli.xml"))
-    {
         // Provjera da li su submit-ani podaci prazni
         if(praznoPolje($_REQUEST['naziv']) || praznoPolje($_REQUEST['cijena']))
         {
@@ -15,7 +13,7 @@ if(isset($_REQUEST['naziv']) && isset($_REQUEST['cijena']))
             echo "<script type='text/javascript'>window.location.href='katalog.php'</script>";
             exit();
         }
-        $modeli = simplexml_load_file("lib/xml/modeli.xml");
+//        $modeli = simplexml_load_file("lib/xml/modeli.xml");
         // Potrebno je obezbijediti zastitu od XSS-a
         $naziv = xssPrevencija($_REQUEST['naziv']);
         $cijena = xssPrevencija($_REQUEST['cijena']);
@@ -35,36 +33,54 @@ if(isset($_REQUEST['naziv']) && isset($_REQUEST['cijena']))
 
         if(isset($_REQUEST['dodajModel']))
         {
-            $vel = $modeli->count();
-            $cvor = $modeli->model[$vel-1];
-            $id = $cvor->id + 1;
-            $model = $modeli->addChild('model');
-            $model->addChild('id',$id);
-            $model->addChild('naziv',$naziv);
-            $model->addChild('cijena',$cijena);
-            $modeli->asXML("lib/xml/modeli.xml");
+       
+            $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+            $veza->exec("set names utf8");
+        
+            $insert = "INSERT INTO modeli (naziv, cijena) " ."VALUES (?, ?)";
 
+            $iskaz = $veza->prepare($insert);
+            $iskaz->bindValue(1, $naziv, PDO::PARAM_STR);
+            $iskaz->bindValue(2, $cijena, PDO::PARAM_STR);
+            $rezultat = $iskaz->execute();
+            //Konekcija kod PDO objekta se zatvara setovanjem objekta na null za razliku
+            // od mysqli gdje je potrebno pozvati metodu closedir
+            $iskaz = null;
+            $veza = null;
+            // ukoliko nije uspješan unos
+            if($rezultat == false)
+            {
+                echo "<script type='text/javascript'>alert('Doslo je do pogreske pri unosu u bazu');</script>";
+                echo "<script type='text/javascript'>window.location.href='main.php'</script>";
+                exit();
+            }
+           
             echo "<script type='text/javascript'>alert('Uspjesno ste dodali model.');</script>";
             echo "<script type='text/javascript'>window.location.href='katalog.php'</script>";
             exit();
         }
         elseif(isset($_REQUEST['izmijeniModel']) && isset($_REQUEST['idModel']))
         {
-            foreach ($modeli->children() as $m)
+            $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+            $veza->exec("set names utf8");
+            $update = "UPDATE modeli SET naziv = :naziv, cijena = :cijena WHERE id = :id";
+            $iskaz = $veza->prepare($update);
+            $iskaz->bindParam(':naziv',$naziv);
+            $iskaz->bindParam(':cijena',$cijena);
+            $iskaz->bindParam(':id',$_REQUEST['idModel']);
+            $rezultat = $iskaz->execute();
+            $iskaz = null;
+            $veza = null;
+            if($rezultat == false)
             {
-                if($m->id == $_REQUEST['idModel'])
-                {
-                    $m->naziv=$naziv;
-                    $m->cijena=$cijena;
-                    $modeli->asXML("lib/xml/modeli.xml");
-                    echo "<script type='text/javascript'>alert('Uspjesno ste izmijenili model.');</script>";
-                    echo "<script type='text/javascript'>window.location.href='katalog.php'</script>";
-                    exit();
-                }
+                echo "<script type='text/javascript'>alert('Doslo je do pogreske pri unosu u bazu');</script>";
+                echo "<script type='text/javascript'>window.location.href='main.php'</script>";
+                exit();
             }
+            echo "<script type='text/javascript'>alert('Uspjesno ste izmijenili model.');</script>";
+            echo "<script type='text/javascript'>window.location.href='katalog.php'</script>";
+            exit();
         }
-
-    }
     else
     {
         header("Location: katalog.php");

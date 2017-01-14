@@ -13,32 +13,41 @@ parse_str(file_get_contents('php://input'), $_REQUEST);
 require 'provjeraAutorizacije.php';
 
 $br = 0;
-if(file_exists("lib/xml/modeli.xml"))
+$veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+$veza->exec("set names utf8");       
+$query = "SELECT * FROM modeli";
+$iskaz = $veza->query($query);
+
+while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
 {
-    $mod = simplexml_load_file("lib/xml/modeli.xml");
-    foreach ($mod->children() as $model)
+    $str = 'opt_'.$row['id'];
+
+    if(isset($_REQUEST[$str]))
     {
-        $str = 'opt_'.$model->id;
-
-        if(isset($_REQUEST[$str]))
+        $br++;
+        if($_REQUEST[$str] == 'obrisi') // funkcija brisanja
         {
-            $br++;
-            if($_REQUEST[$str] == 'obrisi') // funkcija brisanja
-            {
-                $dom=dom_import_simplexml($model);
-                $dom->parentNode->removeChild($dom);
-                $mod->asXML('lib/xml/modeli.xml');
-                header("Location: katalog.php");
-
-            }
+            $delete = "DELETE FROM modeli WHERE id = :id";
+            $iskaz2 = $veza->prepare($delete);
+            $iskaz2->bindParam(":id", $row['id']);
+            $rezultat = $iskaz2->execute();
+            if($rezultat == false)
+                die('Doslo je do greske prilikom brisanja iz baze');
+            $iskaz2 = null;
+            $iskaz = null;
+            $veza = null;
+            header("Location: katalog.php");
 
         }
-    }
-    if($br == 0 && !isset($_REQUEST['dodaj'])) {
-        header("Location: katalog.php");
-        exit();
+
     }
 }
+if($br == 0 && !isset($_REQUEST['dodaj'])) {
+    header("Location: katalog.php");
+    exit();
+}
+$iskaz = null;
+$veza = null;
 ?>
 <div class="row" id="vrh">
     <div class="kolona-12">
@@ -138,24 +147,21 @@ if(isset($_SESSION['username']))
         </div>
     </div>
     <?php
-        if(!file_exists("lib/xml/modeli.xml"))
-        {
-            $modeli = new SimpleXMLElement("<modeli></modeli>");
-            header("Content-type: text/xml");
-            $narudzbe->asXML("lib/xml/modeli.xml");
-            header('Loaction: katalog.php');
-            exit();
-        }
-        else{
-            $modeli = simplexml_load_file("lib/xml/modeli.xml");
+        
+        $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+        $veza->exec("set names utf8");
+        
+        $query = "SELECT * FROM modeli";
+        $iskaz = $veza->query($query);
+
         $temp;
-        foreach ($modeli->children() as $model)
+        while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
         {
-            $str = 'opt_'.$model->id;
+            $str = 'opt_'.$row['id'];
 
             if(isset($_REQUEST[$str])) {
                 if ($_REQUEST[$str] == 'izmijeni') {
-                    $temp = $model;
+                    $temp = $row;
                     break;
                 }
             }
@@ -177,7 +183,7 @@ if(isset($_SESSION['username']))
         }
         elseif(isset($temp))
         {
-            echo "<input type='text' style='border: none !important;' name='naziv' value='".$temp->naziv."'>";
+            echo "<input type='text' style='border: none !important;' name='naziv' value='".$temp['naziv']."'>";
         }
         echo "</div>";
         echo "</div>";
@@ -193,7 +199,7 @@ if(isset($_SESSION['username']))
         }
         elseif(isset($temp))
         {
-            echo "<input type='text' style='border: none !important;' name='cijena' value='".$temp->cijena."'>";
+            echo "<input type='text' style='border: none !important;' name='cijena' value='".$temp['cijena']."'>";
         }
         echo "</div>";
         echo "</div>";
@@ -206,14 +212,16 @@ if(isset($_SESSION['username']))
         }
         elseif(isset($temp))
         {
-            echo "<input type='hidden' name='idModel' value='".$temp->id."'>";
+            echo "<input type='hidden' name='idModel' value='".$temp['id']."'>";
             echo "<input class='dugmeZaSlanje' style='font-size: 120%;' type='submit' name='izmijeniModel' value='Izmijeni model'>";
         }
         echo "</div>";
         echo "</div>";
         echo "</div>";
         echo "</form>";
-        }
+        $iskaz = null;
+        $veza = null;
+
     ?>
 </body>
 </html>

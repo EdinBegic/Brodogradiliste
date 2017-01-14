@@ -1,14 +1,5 @@
 <?php
-if(!file_exists("lib/xml/korisnici.xml")) // Ukoliko ne postoji fajl, kreiraj novi
-{
-    $korisnici = new SimpleXMLElement("<korisnici></korisnici>");
-    header("Content-type: text/xml");
-    $korisnici->asXML("lib/xml/korisnici.xml");
-    header("Location: main.php");
-    exit();
-}
-else
-{
+
     $_REQUEST = array(); //workaround for broken PHPstorm
     parse_str(file_get_contents('php://input'), $_REQUEST);
     require 'validacija.php';
@@ -42,36 +33,29 @@ else
         echo "<script type='text/javascript'>window.location.href='main.php'</script>";
         exit();
     }
-    $korisnici = simplexml_load_file("lib/xml/korisnici.xml");
-    $brojac = 0;
-    foreach($korisnici->children() as $korisnik)
-    {
-        if((string)$korisnik->username == $usernameIzForme)
-        {
-            if((string)$korisnik->password == $passwordIzForme)
-            {
+
+    $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+    $veza->exec("set names utf8"); 
+    $query = "SELECT COUNT(username) AS brojac FROM korisnik WHERE username = :username AND password = :password";
+   
+    $iskaz = $veza->prepare($query);
+    $iskaz->bindValue(':username', $usernameIzForme);
+    $iskaz->bindValue(':password', $passwordIzForme);
+    $iskaz->execute();
+    $row = $iskaz->fetch(PDO::FETCH_ASSOC);
+     if($row['brojac'] == 0){
+        die('Neuspjesna prijava!');
+     }
+     else if($row['brojac'] == 1)
+     {
                 session_start();
                 $_SESSION['username'] = $usernameIzForme;
                 echo "<script type='text/javascript'>alert('Uspjesno ste se prijavili.');</script>";
                 echo "<script type='text/javascript'>window.location.href='main.php'</script>";
                 exit();
-            }
-            else
-            {
-                echo "<script type='text/javascript'>alert('Unijeli ste pogresan password');</script>";
-                echo "<script type='text/javascript'>window.location.href='main.php'</script>";
-                exit();
-            }
-            $brojac++;
-            break;
-        }
-    }
-    if($brojac == 0)
-    {
-        echo "<script type='text/javascript'>alert('Ne postoji korisnik s takvim username-om.');</script>";
-        echo "<script type='text/javascript'>window.location.href='main.php'</script>";
-        exit();
-    }
-
-}
+     }
+     else
+     {
+         die('Greska pri unosu u bazu. Više korisnika s istim username-om');
+     }            
 

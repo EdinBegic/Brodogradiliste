@@ -106,17 +106,14 @@ if(isset($_SESSION['username']))
     <?php
         $_REQUEST = array(); //workaround for broken PHPstorm
         parse_str(file_get_contents('php://input'), $_REQUEST);
-        $modeli;
-        if(!file_exists('lib/xml/modeli.xml'))
-        {
-            $modeli = new SimpleXMLElement("<modeli></modeli>");
-            header("Content-type: text/xml");
-            $modeli->asXML("lib/xml/modeli.xml");
-            header("Location: katalog.php");
-            exit();
-        }
-        else
-            $modeli = simplexml_load_file("lib/xml/modeli.xml");
+     /*   $modeli;
+        $modeli = simplexml_load_file("lib/xml/modeli.xml"); */
+        $veza = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=brodogradiliste', 'admin', 'password');
+        $veza->exec("set names utf8");
+        
+        $query = "SELECT * FROM modeli";
+        $iskaz = $veza->query($query);
+       // $row = $iskaz->fetch(PDO::FETCH_ASSOC);
         if(isset($_SESSION['username'])) {
 
             if ($_SESSION['username'] == 'admin'){
@@ -138,13 +135,13 @@ if(isset($_SESSION['username']))
                 echo "</div>";
             }
         }
-        foreach ($modeli->children() as $model)
+        while ($row = $iskaz->fetch(PDO::FETCH_ASSOC))
         {
             if(isset($_GET['pretraga']))
             {
                 if($_GET['pretraga'] != '')
                 {
-                    if(!stristr($model->naziv,$_GET['pretraga']) && !stristr($model->cijena,$_GET['pretraga']))
+                    if(!stristr($row['naziv'],$_GET['pretraga']) && !stristr($row['cijena'],$_GET['pretraga']))
                     {
                         continue;
                     }
@@ -156,26 +153,8 @@ if(isset($_SESSION['username']))
 
             echo "<div class='row generisaniRedovi'>";
 
-            echo "<div class='kolona-6 dodatna1' style='text-align: right'>";
-            if($model->id == 1)
-            {
-                echo "<img class='slika' width='180px' height='90px' id='1' src='Pictures/jahta2.jpg'  alt='Nije se mogla ucitati slika'  onclick='otvoriModal(this.id)'/>";
-
-            }
-            elseif ($model->id == 2)
-            {
-                echo "<img class='slika' width='180px' height='90px' id='2' src='Pictures/katamaran2.jpg'  alt='Nije se mogla ucitati slika'  onclick='otvoriModal(this.id)'/>";
-
-            }
-            elseif ($model->id == 3)
-            {
-                echo "<img class='slika' width='180px' height='90px' id='3' src='Pictures/trajekt2.jpg'  alt='Nije se mogla ucitati slika'  onclick='otvoriModal(this.id)'/>";
-            }
-            else
-            {
-                echo "<img class='slika' width='180px' height='90px' id=".$model->id." src='Pictures/brodRatni.jpg'  alt='Nije se mogla ucitati slika'  onclick='otvoriModal(this.id)'/>";
-
-            }
+            echo "<div class='kolona-6 dodatna1' style='text-align: right'>";     
+            echo "<img class='slika' width='180px' height='90px' id=".$row['id']." src='Pictures/brodRatni.jpg'  alt='Nije se mogla ucitati slika'  onclick='otvoriModal(this.id)'/>";
             echo "</div>";
 
             echo "<div class='kolona-6 dodatna2' style='text-align: left'>";
@@ -185,7 +164,7 @@ if(isset($_SESSION['username']))
             echo "<p style='font-size: 165%'><b>Naziv:</b></p>";
             echo "</div>";
             echo "<div class='kolona-5 dodatna2' style='text-align: left'>";
-            echo "<p style='font-size: 165%'>".$model->naziv."</p>";
+            echo "<p style='font-size: 165%'>".$row['naziv']."</p>";
             echo "</div>";
             echo "</div>";
 
@@ -194,7 +173,7 @@ if(isset($_SESSION['username']))
             echo "<p style='font-size: 165%'><b>Cijena:</b></p>";
             echo "</div>";
             echo "<div class='kolona-5 dodatna2' style='text-align: left'>";
-            echo "<p style='font-size: 165%'>".$model->cijena."</p>";
+            echo "<p style='font-size: 165%'>".$row['cijena']."</p>";
             echo "</div>";
             echo "</div>";
 
@@ -203,15 +182,15 @@ if(isset($_SESSION['username']))
                 if($_SESSION['username'] == 'admin') {
                     echo "<div class='row'>";
                     echo "<div class='kolona-3 dodatna2' style='text-align: left'>";
-                    echo "<input style='font-size:120%' class='dugmeZaSlanje' type='submit' name='opt_" . $model->id . "'  value='izmijeni'>";
+                    echo "<input style='font-size:120%' class='dugmeZaSlanje' type='submit' name='opt_" . $row['id'] . "'  value='izmijeni'>";
                     echo "</div>";
                     echo "<div class='kolona-3 dodatna2' style='text-align: left'>";
-                    echo "<input style='font-size:120%' class='dugmeZaSlanje' type='submit' name='opt_" . $model->id . "'  value='obrisi'>";
+                    echo "<input style='font-size:120%' class='dugmeZaSlanje' type='submit' name='opt_" . $row['id'] . "'  value='obrisi'>";
                     echo "</div>";
                     echo "</div>";
                 }
             }
-
+        
             echo "</div>";
 
             echo "</div>";
