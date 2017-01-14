@@ -47,11 +47,8 @@ Virtuelni prikaz brodogradilišta na kome će kupci imati opciju naručivanja od
 - Napravljena skripta webServis.php koja implementira GET metodu rest servisa i na kojoj se mogu vidjeti izlistani JSON objekti za tabelu 'komentar'
 - U folderu POSTMAN prikazano je nekoliko primjera upotrebe kreiranog web servisa
 - deployment stranice na server: http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/main.php
-<<<<<<< HEAD
 - deployment baze na server (username:'admin', password:'password') : http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/pma 
-=======
-- deployment baze na server (username:'admin', password:'password'): http://brodogradiliste-brodogradiliste.44fs.preview.openshiftapps.com/pma 
->>>>>>> origin/master
+
 
 # II  - Šta nije urađeno? Spirala 1
  Nisu implementirani media querry-iji na ostale dvije stranice.
